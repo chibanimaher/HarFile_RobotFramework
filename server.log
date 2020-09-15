@@ -1,0 +1,35 @@
+Running BrowserMob Proxy using LittleProxy implementation. To revert to the legacy implementation, run the proxy with the command-line option '--use-littleproxy false'.
+[INFO  2020-09-14T11:52:27,553 net.lightbody.bmp.proxy.Main] (main) Starting BrowserMob Proxy version 2.1.4 
+[INFO  2020-09-14T11:52:27,626 org.eclipse.jetty.util.log] (main) jetty-7.x.y-SNAPSHOT 
+[INFO  2020-09-14T11:52:28,030 org.eclipse.jetty.util.log] (main) started o.e.j.s.ServletContextHandler{/,null} 
+[WARN  2020-09-14T11:52:28,273 org.eclipse.jetty.util.log] (main) FAILED SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use: bind 
+[WARN  2020-09-14T11:52:28,274 org.eclipse.jetty.util.log] (main) FAILED org.eclipse.jetty.server.Server@663411de: java.net.BindException: Address already in use: bind 
+[ERROR 2020-09-14T11:52:28,275 net.lightbody.bmp.proxy.Main] (main) Failed to start Jetty server. Aborting. java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:1.8.0_261]
+	at sun.nio.ch.Net.bind(Unknown Source) ~[?:1.8.0_261]
+	at sun.nio.ch.Net.bind(Unknown Source) ~[?:1.8.0_261]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(Unknown Source) ~[?:1.8.0_261]
+	at sun.nio.ch.ServerSocketAdaptor.bind(Unknown Source) ~[?:1.8.0_261]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:162) ~[browsermob-dist-2.1.4.jar:?]
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:356) ~[browsermob-dist-2.1.4.jar:?]
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:240) ~[browsermob-dist-2.1.4.jar:?]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:55) ~[browsermob-dist-2.1.4.jar:?]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:269) ~[browsermob-dist-2.1.4.jar:?]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:55) ~[browsermob-dist-2.1.4.jar:?]
+	at net.lightbody.bmp.proxy.Main.main(Main.java:64) [browsermob-dist-2.1.4.jar:?]
+
+Exception in thread "main" net.lightbody.bmp.exception.JettyException: Unable to start Jetty server
+	at net.lightbody.bmp.proxy.Main.main(Main.java:68)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Unknown Source)
+	at sun.nio.ch.Net.bind(Unknown Source)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(Unknown Source)
+	at sun.nio.ch.ServerSocketAdaptor.bind(Unknown Source)
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:162)
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:356)
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:240)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:55)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:269)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:55)
+	at net.lightbody.bmp.proxy.Main.main(Main.java:64)

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keywordspec name="BrowserMobProxyLibrary" type="LIBRARY" format="ROBOT" scope="GLOBAL" namedargs="true" generated="2020-09-11T10:40:56Z" specversion="2" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\BrowserMobProxyLibrary\__init__.py" lineno="22">
+<version>0.1.3</version>
+<scope>global</scope>
+<namedargs>yes</namedargs>
+<doc>BrowserMobProxyLibrary is a Robot Framework library ro interface with BrowserMob Proxy.
+BrowserMob Proxy is a simple utility to capture performance data for web apps (via the HAR format),
+as well as manipulate browser behavior and traffic, such as whitelisting and blacklisting content,
+simulating network traffic and latency, and rewriting HTTP requests and responses.
+
+= Before running tests =
+
+Prior to running test cases using BrowserMobProxyLibrary, BrowserMobProxyLibrary must be
+imported into your Robot test suite.</doc>
+<kw name="Add To Capabilities" lineno="105">
+<arguments>
+<arg>capabilities</arg>
+</arguments>
+<doc>Adds an 'proxy' entry to a desired capabilities dictionary with the
+BrowserMob proxy information
+
+:param capabilities: The Desired capabilities object from Selenium WebDriver</doc>
+</kw>
+<kw name="Add To Webdriver Capabilities" lineno="114">
+<arguments>
+<arg>capabilities</arg>
+</arguments>
+<doc>Adds an 'proxy' entry to a desired capabilities dictionary with the
+BrowserMob proxy information
+
+:param capabilities: The Desired capabilities object from Selenium WebDriver</doc>
+</kw>
+<kw name="Basic Authentication" lineno="177">
+<arguments>
+<arg>domain</arg>
+<arg>username</arg>
+<arg>password</arg>
+</arguments>
+<doc>This add automatic basic authentication
+
+:param domain: domain to set authentication credentials for
+:param username: valid username to use when authenticating
+:param  password: valid password to use when authenticating</doc>
+</kw>
+<kw name="Blacklist" lineno="156">
+<arguments>
+<arg>regexp</arg>
+<arg>status_code</arg>
+</arguments>
+<doc>Sets a list of URL patterns to blacklist
+
+:param regexp: a comma separated list of regular expressions
+:param status_code: the HTTP status code to return for URLs that do not                        match the blacklist</doc>
+</kw>
+<kw name="Clear Dns Cache" lineno="252">
+<arguments>
+</arguments>
+<doc>Clears the DNS cache associated with the proxy instance</doc>
+</kw>
+<kw name="Close Proxy" lineno="87">
+<arguments>
+</arguments>
+<doc>shuts down the proxy and closes the port</doc>
+</kw>
+<kw name="Connect To Remote Server" lineno="78">
+<arguments>
+<arg>host=localhost</arg>
+<arg>port=9090</arg>
+</arguments>
+<doc>Connect to a Remote Browsermob Proxy Server
+
+:param host: The host of the proxy server.
+:param port: The port of the proxy server.</doc>
+</kw>
+<kw name="Create Proxy" lineno="51">
+<arguments>
+<arg>params={}</arg>
+</arguments>
+<doc>Creates proxy.
+
+:param params: Dictionary where you can specify params                     like httpProxy and httpsProxy</doc>
+</kw>
+<kw name="Get Har" lineno="123">
+<arguments>
+</arguments>
+<doc>Returns the HAR that has been recorded</doc>
+</kw>
+<kw name="Get Har As Json" lineno="129">
+<arguments>
+</arguments>
+<doc>Returns the HAR that has been recorded as json</doc>
+</kw>
+<kw name="Get Proxy Url" lineno="44">
+<arguments>
+</arguments>
+<doc>Gets the url that the proxy is running on. This is not the URL clients
+should connect to.</doc>
+</kw>
+<kw name="Get Selenium Proxy" lineno="93">
+<arguments>
+</arguments>
+<doc>Returns a Selenium WebDriver Proxy with details of the HTTP Proxy</doc>
+</kw>
+<kw name="Get Webdriver Proxy" lineno="99">
+<arguments>
+</arguments>
+<doc>Returns a Selenium WebDriver Proxy with details of the HTTP Proxy</doc>
+</kw>
+<kw name="New Har" lineno="135">
+<arguments>
+<arg>ref=None</arg>
+<arg>options={}</arg>
+</arguments>
+<doc>This sets a new HAR to be recorded
+
+:param ref: A reference for the HAR. Defaults to None
+:param options: A dictionary that will be passed to BrowserMob Proxy                    with specific keywords. Keywords are:                    captureHeaders - Boolean, capture headers                    captureContent - Boolean, capture content bodies                    captureBinaryContent - Boolean, capture binary content</doc>
+</kw>
+<kw name="New Page" lineno="148">
+<arguments>
+<arg>ref=None</arg>
+</arguments>
+<doc>This sets a new page to be recorded
+
+:param ref: A reference for the new page. Defaults to None</doc>
+</kw>
+<kw name="Remap Hosts" lineno="234">
+<arguments>
+<arg>address</arg>
+<arg>ip_address</arg>
+</arguments>
+<doc>Remap the hosts for a specific URL
+
+:param address: url that you wish to remap
+:param ip_address: IP Address that will handle all traffic for the address passed in</doc>
+</kw>
+<kw name="Retry" lineno="267">
+<arguments>
+<arg>retry_count</arg>
+</arguments>
+<doc>Retries.
+
+:param retry_count: the number of retries</doc>
+</kw>
+<kw name="Rewrite Url" lineno="258">
+<arguments>
+<arg>match</arg>
+<arg>replace</arg>
+</arguments>
+<doc>Rewrites the requested url.
+
+:param match: a regex to match requests with
+:param replace: unicode a string to replace the matches with</doc>
+</kw>
+<kw name="Set Headers" lineno="187">
+<arguments>
+<arg>headers</arg>
+</arguments>
+<doc>This sets the headers that will set by the proxy on all requests
+
+:param headers: this is a dictionary of the headers to be set</doc>
+</kw>
+<kw name="Set Limits" lineno="211">
+<arguments>
+<arg>options</arg>
+</arguments>
+<doc>Limit the bandwidth through the proxy.
+
+:param options: A dictionary with all the details you want to set.                         downstreamKbps - Sets the downstream kbps                         upstreamKbps - Sets the upstream kbps                         latency - Add the given latency to each HTTP request</doc>
+</kw>
+<kw name="Set Request Interceptor" lineno="203">
+<arguments>
+<arg>js</arg>
+</arguments>
+<doc>Executes the javascript against each request
+
+:param js: the javascript to execute</doc>
+</kw>
+<kw name="Set Response Interceptor" lineno="195">
+<arguments>
+<arg>js</arg>
+</arguments>
+<doc>Executes the javascript against each response
+
+:param js: the javascript to execute</doc>
+</kw>
+<kw name="Set Timeouts" lineno="222">
+<arguments>
+<arg>options</arg>
+</arguments>
+<doc>Configure timeouts in the proxy
+
+:param options: A dictionary with all the details you want to set.                         request - request timeout (in seconds)                         read - read timeout (in seconds)                         connection - connection timeout (in seconds)                         dns - dns lookup timeout (in seconds)</doc>
+</kw>
+<kw name="Start Local Server" lineno="61">
+<arguments>
+<arg>path=browsermob-proxy</arg>
+<arg>options={}</arg>
+</arguments>
+<doc>Start local Browsermob Proxy Server instance
+
+:param path: Path to the browsermob proxy batch file
+:param options: Dictionary that can hold the port.</doc>
+</kw>
+<kw name="Stop Local Server" lineno="71">
+<arguments>
+</arguments>
+<doc>This will stop the process running the Browsermob Proxy</doc>
+</kw>
+<kw name="Wait For Traffic To Stop" lineno="243">
+<arguments>
+<arg>quiet_period</arg>
+<arg>timeout</arg>
+</arguments>
+<doc>Waits for the network to be quiet
+
+:param quiet_period: number of miliseconds the network needs to be quiet for
+:param timeout: max number of miliseconds to wait</doc>
+</kw>
+<kw name="Whitelist" lineno="167">
+<arguments>
+<arg>regexp</arg>
+<arg>status_code</arg>
+</arguments>
+<doc>Sets a list of URL patterns to whitelist
+
+:param regex: a comma separated list of regular expressions
+:param status_code: the HTTP status code to return for URLs that do not                        match the whitelist</doc>
+</kw>
+</keywordspec>

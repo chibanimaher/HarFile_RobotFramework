@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keywordspec name="RequestsLibrary" type="LIBRARY" format="ROBOT" scope="GLOBAL" namedargs="true" generated="2020-09-14T14:58:32Z" specversion="2" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\__init__.py" lineno="5">
+<version>0.7.1</version>
+<scope>global</scope>
+<namedargs>yes</namedargs>
+<doc>Documentation for library ``RequestsLibrary``.</doc>
+<kw name="Create Client Cert Session" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="456">
+<arguments>
+<arg>alias</arg>
+<arg>url</arg>
+<arg>headers={}</arg>
+<arg>cookies={}</arg>
+<arg>client_certs=None</arg>
+<arg>timeout=None</arg>
+<arg>proxies=None</arg>
+<arg>verify=False</arg>
+<arg>debug=0</arg>
+<arg>max_retries=3</arg>
+<arg>backoff_factor=0.1</arg>
+<arg>disable_warnings=0</arg>
+<arg>retry_status_list=[]</arg>
+<arg>retry_method_list=['DELETE', 'HEAD', 'OPTIONS', 'GET', 'TRACE', 'PUT']</arg>
+</arguments>
+<doc>Create Session: create a HTTP session to a server
+
+``url`` Base url of the server
+
+``alias`` Robot Framework alias to identify the session
+
+``headers`` Dictionary of default headers
+
+``cookies`` Dictionary of cookies
+
+``client_certs`` ['client certificate', 'client key'] PEM files containing the client key and certificate
+
+``timeout`` Connection timeout
+
+``proxies`` Dictionary that contains proxy urls for HTTP and HTTPS communication
+
+``verify`` Whether the SSL cert will be verified. A CA_BUNDLE path can also be provided.
+         Defaults to False.
+
+``debug`` Enable http verbosity option more information
+        https://docs.python.org/2/library/httplib.html#httplib.HTTPConnection.set_debuglevel
+
+``max_retries`` Number of maximum retries each connection should attempt.
+                By default it will retry 3 times in case of connection errors only.
+                A 0 value will disable any kind of retries regardless of other retry settings.
+                In case the number of retries is reached a retry exception is raised.
+
+``disable_warnings`` Disable requests warning useful when you have large number of testcases
+
+``backoff_factor`` Introduces a delay time between retries that is longer after each retry.
+                   eg. if backoff_factor is set to 0.1
+                   the sleep between attemps will be: 0.0, 0.2, 0.4
+                   More info here: https://urllib3.readthedocs.io/en/latest/reference/urllib3.util.html
+
+``retry_method_list`` List of uppercased HTTP method verbs where retries are allowed.
+                      By default retries are allowed only on HTTP requests methods that are considered to be
+                      idempotent (multiple requests with the same parameters end with the same state).
+                      eg. set to ['POST', 'GET'] to retry only those kind of requests.
+
+``retry_status_list`` List of integer HTTP status codes that, if returned, a retry is attempted.
+                      eg. set to [502, 503] to retry requests if those status are returned.
+                      Note that max_retries must be greater than 0.</doc>
+</kw>
+<kw name="Create Custom Session" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="209">
+<arguments>
+<arg>alias</arg>
+<arg>url</arg>
+<arg>auth</arg>
+<arg>headers={}</arg>
+<arg>cookies={}</arg>
+<arg>timeout=None</arg>
+<arg>proxies=None</arg>
+<arg>verify=False</arg>
+<arg>debug=0</arg>
+<arg>max_retries=3</arg>
+<arg>backoff_factor=0.1</arg>
+<arg>disable_warnings=0</arg>
+<arg>retry_status_list=[]</arg>
+<arg>retry_method_list=['DELETE', 'HEAD', 'OPTIONS', 'GET', 'TRACE', 'PUT']</arg>
+</arguments>
+<doc>Create Session: create a HTTP session to a server
+
+``url`` Base url of the server
+
+``alias`` Robot Framework alias to identify the session
+
+``headers`` Dictionary of default headers
+
+``cookies`` Dictionary of cookies
+
+``auth`` A Custom Authentication object to be passed on to the requests library.
+        http://docs.python-requests.org/en/master/user/advanced/#custom-authentication
+
+``timeout`` Connection timeout
+
+``proxies`` Dictionary that contains proxy urls for HTTP and HTTPS communication
+
+``verify`` Whether the SSL cert will be verified. A CA_BUNDLE path can also be provided.
+         Defaults to False.
+
+``debug`` Enable http verbosity option more information
+        https://docs.python.org/2/library/httplib.html#httplib.HTTPConnection.set_debuglevel
+
+``max_retries`` Number of maximum retries each connection should attempt.
+                By default it will retry 3 times in case of connection errors only.
+                A 0 value will disable any kind of retries regardless of other retry settings.
+                In case the number of retries is reached a retry exception is raised.
+
+``disable_warnings`` Disable requests warning useful when you have large number of testcases
+
+``backoff_factor`` Introduces a delay time between retries that is longer after each retry.
+                   eg. if backoff_factor is set to 0.1
+                   the sleep between attemps will be: 0.0, 0.2, 0.4
+                   More info here: https://urllib3.readthedocs.io/en/latest/reference/urllib3.util.html
+
+``retry_method_list`` List of uppercased HTTP method verbs where retries are allowed.
+                      By default retries are allowed only on HTTP requests methods that are considered to be
+                      idempotent (multiple requests with the same parameters end with the same state).
+                      eg. set to ['POST', 'GET'] to retry only those kind of requests.
+
+``retry_status_list`` List of integer HTTP status codes that, if returned, a retry is attempted.
+                      eg. set to [502, 503] to retry requests if those status are returned.
+                      Note that max_retries must be greater than 0.</doc>
+</kw>
+<kw name="Create Digest Session" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="380">
+<arguments>
+<arg>alias</arg>
+<arg>url</arg>
+<arg>auth</arg>
+<arg>headers={}</arg>
+<arg>cookies={}</arg>
+<arg>timeout=None</arg>
+<arg>proxies=None</arg>
+<arg>verify=False</arg>
+<arg>debug=0</arg>
+<arg>max_retries=3</arg>
+<arg>backoff_factor=0.1</arg>
+<arg>disable_warnings=0</arg>
+<arg>retry_status_list=[]</arg>
+<arg>retry_method_list=['DELETE', 'HEAD', 'OPTIONS', 'GET', 'TRACE', 'PUT']</arg>
+</arguments>
+<doc>Create Session: create a HTTP session to a server
+
+``url`` Base url of the server
+
+``alias`` Robot Framework alias to identify the session
+
+``headers`` Dictionary of default headers
+
+``cookies`` Dictionary of cookies
+
+``auth`` ['DOMAIN', 'username', 'password'] for NTLM Authentication
+
+``timeout`` Connection timeout
+
+``proxies`` Dictionary that contains proxy urls for HTTP and HTTPS communication
+
+``verify`` Whether the SSL cert will be verified. A CA_BUNDLE path can also be provided.
+         Defaults to False.
+
+``debug`` Enable http verbosity option more information
+        https://docs.python.org/2/library/httplib.html#httplib.HTTPConnection.set_debuglevel
+
+``max_retries`` Number of maximum retries each connection should attempt.
+                By default it will retry 3 times in case of connection errors only.
+                A 0 value will disable any kind of retries regardless of other retry settings.
+                In case the number of retries is reached a retry exception is raised.
+
+``disable_warnings`` Disable requests warning useful when you have large number of testcases
+
+``backoff_factor`` Introduces a delay time between retries that is longer after each retry.
+                   eg. if backoff_factor is set to 0.1
+                   the sleep between attemps will be: 0.0, 0.2, 0.4
+                   More info here: https://urllib3.readthedocs.io/en/latest/reference/urllib3.util.html
+
+``retry_method_list`` List of uppercased HTTP method verbs where retries are allowed.
+                      By default retries are allowed only on HTTP requests methods that are considered to be
+                      idempotent (multiple requests with the same parameters end with the same state).
+                      eg. set to ['POST', 'GET'] to retry only those kind of requests.
+
+``retry_status_list`` List of integer HTTP status codes that, if returned, a retry is attempted.
+                      eg. set to [502, 503] to retry requests if those status are returned.
+                      Note that max_retries must be greater than 0.</doc>
+</kw>
+<kw name="Create Ntlm Session" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="291">
+<arguments>
+<arg>alias</arg>
+<arg>url</arg>
+<arg>auth</arg>
+<arg>headers={}</arg>
+<arg>cookies={}</arg>
+<arg>timeout=None</arg>
+<arg>proxies=None</arg>
+<arg>verify=False</arg>
+<arg>debug=0</arg>
+<arg>max_retries=3</arg>
+<arg>backoff_factor=0.1</arg>
+<arg>disable_warnings=0</arg>
+<arg>retry_status_list=[]</arg>
+<arg>retry_method_list=['DELETE', 'HEAD', 'OPTIONS', 'GET', 'TRACE', 'PUT']</arg>
+</arguments>
+<doc>Create Session: create a HTTP session to a server
+
+``url`` Base url of the server
+
+``alias`` Robot Framework alias to identify the session
+
+``headers`` Dictionary of default headers
+
+``cookies`` Dictionary of cookies
+
+``auth`` ['DOMAIN', 'username', 'password'] for NTLM Authentication
+
+``timeout`` Connection timeout
+
+``proxies`` Dictionary that contains proxy urls for HTTP and HTTPS communication
+
+``verify`` Whether the SSL cert will be verified. A CA_BUNDLE path can also be provided.
+         Defaults to False.
+
+``debug`` Enable http verbosity option more information
+        https://docs.python.org/2/library/httplib.html#httplib.HTTPConnection.set_debuglevel
+
+``max_retries`` Number of maximum retries each connection should attempt.
+                By default it will retry 3 times in case of connection errors only.
+                A 0 value will disable any kind of retries regardless of other retry settings.
+                In case the number of retries is reached a retry exception is raised.
+
+``disable_warnings`` Disable requests warning useful when you have large number of testcases
+
+``backoff_factor`` Introduces a delay time between retries that is longer after each retry.
+                   eg. if backoff_factor is set to 0.1
+                   the sleep between attemps will be: 0.0, 0.2, 0.4
+                   More info here: https://urllib3.readthedocs.io/en/latest/reference/urllib3.util.html
+
+``retry_method_list`` List of uppercased HTTP method verbs where retries are allowed.
+                      By default retries are allowed only on HTTP requests methods that are considered to be
+                      idempotent (multiple requests with the same parameters end with the same state).
+                      eg. set to ['POST', 'GET'] to retry only those kind of requests.
+
+``retry_status_list`` List of integer HTTP status codes that, if returned, a retry is attempted.
+                      eg. set to [502, 503] to retry requests if those status are returned.
+                      Note that max_retries must be greater than 0.</doc>
+</kw>
+<kw name="Create Session" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="129">
+<arguments>
+<arg>alias</arg>
+<arg>url</arg>
+<arg>headers={}</arg>
+<arg>cookies={}</arg>
+<arg>auth=None</arg>
+<arg>timeout=None</arg>
+<arg>proxies=None</arg>
+<arg>verify=False</arg>
+<arg>debug=0</arg>
+<arg>max_retries=3</arg>
+<arg>backoff_factor=0.1</arg>
+<arg>disable_warnings=0</arg>
+<arg>retry_status_list=[]</arg>
+<arg>retry_method_list=['DELETE', 'HEAD', 'OPTIONS', 'GET', 'TRACE', 'PUT']</arg>
+</arguments>
+<doc>Create Session: create a HTTP session to a server
+
+``alias`` Robot Framework alias to identify the session
+
+``url`` Base url of the server
+
+``headers`` Dictionary of default headers
+
+``cookies`` Dictionary of cookies
+
+``auth`` List of username &amp; password for HTTP Basic Auth
+
+``timeout`` Connection timeout
+
+``proxies`` Dictionary that contains proxy urls for HTTP and HTTPS communication
+
+``verify`` Whether the SSL cert will be verified. A CA_BUNDLE path can also be provided.
+
+``debug`` Enable http verbosity option more information
+        https://docs.python.org/2/library/httplib.html#httplib.HTTPConnection.set_debuglevel
+
+``max_retries`` Number of maximum retries each connection should attempt.
+                By default it will retry 3 times in case of connection errors only.
+                A 0 value will disable any kind of retries regardless of other retry settings.
+                In case the number of retries is reached a retry exception is raised.
+
+``disable_warnings`` Disable requests warning useful when you have large number of testcases
+
+``backoff_factor`` Introduces a delay time between retries that is longer after each retry.
+                   eg. if backoff_factor is set to 0.1
+                   the sleep between attemps will be: 0.0, 0.2, 0.4
+                   More info here: https://urllib3.readthedocs.io/en/latest/reference/urllib3.util.html
+
+``retry_method_list`` List of uppercased HTTP method verbs where retries are allowed.
+                      By default retries are allowed only on HTTP requests methods that are considered to be
+                      idempotent (multiple requests with the same parameters end with the same state).
+                      eg. set to ['POST', 'GET'] to retry only those kind of requests.
+
+``retry_status_list`` List of integer HTTP status codes that, if returned, a retry is attempted.
+                      eg. set to [502, 503] to retry requests if those status are returned.
+                      Note that max_retries must be greater than 0.</doc>
+</kw>
+<kw name="Delete All Sessions" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="551">
+<arguments>
+</arguments>
+<doc>Removes all the session objects</doc>
+</kw>
+<kw name="Delete Request" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="797">
+<arguments>
+<arg>alias</arg>
+<arg>uri</arg>
+<arg>data=None</arg>
+<arg>json=None</arg>
+<arg>params=None</arg>
+<arg>headers=None</arg>
+<arg>allow_redirects=None</arg>
+<arg>timeout=None</arg>
+</arguments>
+<doc>Send a DELETE request on the session object found using the
+given `alias`
+
+``alias`` that will be used to identify the Session object in the cache
+
+``uri`` to send the DELETE request to
+
+``json`` a value that will be json encoded
+       and sent as request data if data is not specified
+
+``headers`` a dictionary of headers to use with the request
+
+``allow_redirects`` Boolean. Set to True if POST/PUT/DELETE redirect following is allowed.
+
+``timeout`` connection timeout</doc>
+</kw>
+<kw name="Get File For Streaming Upload" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="958">
+<arguments>
+<arg>path</arg>
+</arguments>
+<doc>Opens and returns a file descriptor of a specified file to be passed as ``data`` parameter
+to other requests keywords.
+
+This allows streaming upload of large files without reading them into memory.
+
+File descriptor is binary mode and read only. Requests keywords will automatically close the file,
+if used outside this library it's up to the caller to close it.</doc>
+</kw>
+<kw name="Get Request" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="587">
+<arguments>
+<arg>alias</arg>
+<arg>uri</arg>
+<arg>headers=None</arg>
+<arg>data=None</arg>
+<arg>json=None</arg>
+<arg>params=None</arg>
+<arg>allow_redirects=None</arg>
+<arg>timeout=None</arg>
+</arguments>
+<doc>Send a GET request on the session object found using the
+given `alias`
+
+``alias`` that will be used to identify the Session object in the cache
+
+``uri`` to send the GET request to
+
+``params`` url parameters to append to the uri
+
+``headers`` a dictionary of headers to use with the request
+
+``data`` a dictionary of key-value pairs that will be urlencoded
+       and sent as GET data
+       or binary data that is sent as the raw body content
+
+``json`` a value that will be json encoded
+       and sent as GET data if data is not specified
+
+``allow_redirects`` Boolean. Set to True if POST/PUT/DELETE redirect following is allowed.
+
+``timeout`` connection timeout</doc>
+</kw>
+<kw name="Head Request" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="840">
+<arguments>
+<arg>alias</arg>
+<arg>uri</arg>
+<arg>headers=None</arg>
+<arg>allow_redirects=None</arg>
+<arg>timeout=None</arg>
+</arguments>
+<doc>Send a HEAD request on the session object found using the
+given `alias`
+
+``alias`` that will be used to identify the Session object in the cache
+
+``uri`` to send the HEAD request to
+
+``allow_redirects`` Boolean. Set to True if POST/PUT/DELETE redirect following is allowed.
+
+``headers`` a dictionary of headers to use with the request
+
+``timeout`` connection timeout</doc>
+</kw>
+<kw name="Options Request" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="872">
+<arguments>
+<arg>alias</arg>
+<arg>uri</arg>
+<arg>headers=None</arg>
+<arg>allow_redirects=None</arg>
+<arg>timeout=None</arg>
+</arguments>
+<doc>Send an OPTIONS request on the session object found using the
+given `alias`
+
+``alias`` that will be used to identify the Session object in the cache
+
+``uri`` to send the OPTIONS request to
+
+``allow_redirects`` Boolean. Set to True if POST/PUT/DELETE redirect following is allowed.
+
+``headers`` a dictionary of headers to use with the request
+
+``timeout`` connection timeout</doc>
+</kw>
+<kw name="Patch Request" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="691">
+<arguments>
+<arg>alias</arg>
+<arg>uri</arg>
+<arg>data=None</arg>
+<arg>json=None</arg>
+<arg>params=None</arg>
+<arg>headers=None</arg>
+<arg>files=None</arg>
+<arg>allow_redirects=None</arg>
+<arg>timeout=None</arg>
+</arguments>
+<doc>Send a PATCH request on the session object found using the
+given `alias`
+
+``alias`` that will be used to identify the Session object in the cache
+
+``uri`` to send the PATCH request to
+
+``data`` a dictionary of key-value pairs that will be urlencoded
+       and sent as PATCH data
+       or binary data that is sent as the raw body content
+       or file descriptor retrieved by Get File For Streaming Upload
+
+``json`` a value that will be json encoded
+       and sent as PATCH data if data is not specified
+
+``headers`` a dictionary of headers to use with the request
+
+``files`` a dictionary of file names containing file data to PATCH to the server
+
+``allow_redirects`` Boolean. Set to True if POST/PUT/DELETE redirect following is allowed.
+
+``params`` url parameters to append to the uri
+
+``timeout`` connection timeout</doc>
+</kw>
+<kw name="Post Request" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="635">
+<arguments>
+<arg>alias</arg>
+<arg>uri</arg>
+<arg>data=None</arg>
+<arg>json=None</arg>
+<arg>params=None</arg>
+<arg>headers=None</arg>
+<arg>files=None</arg>
+<arg>allow_redirects=None</arg>
+<arg>timeout=None</arg>
+</arguments>
+<doc>Send a POST request on the session object found using the
+given `alias`
+
+``alias`` that will be used to identify the Session object in the cache
+
+``uri`` to send the POST request to
+
+``data`` a dictionary of key-value pairs that will be urlencoded
+       and sent as POST data
+       or binary data that is sent as the raw body content
+       or passed as such for multipart form data if ``files`` is also defined
+       or file descriptor retrieved by Get File For Streaming Upload
+
+``json`` a value that will be json encoded
+       and sent as POST data if files or data is not specified
+
+``params`` url parameters to append to the uri
+
+``headers`` a dictionary of headers to use with the request
+
+``files`` a dictionary of file names containing file data to POST to the server
+
+``allow_redirects`` Boolean. Set to True if POST/PUT/DELETE redirect following is allowed.
+
+``timeout`` connection timeout</doc>
+</kw>
+<kw name="Put Request" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="745">
+<arguments>
+<arg>alias</arg>
+<arg>uri</arg>
+<arg>data=None</arg>
+<arg>json=None</arg>
+<arg>params=None</arg>
+<arg>files=None</arg>
+<arg>headers=None</arg>
+<arg>allow_redirects=None</arg>
+<arg>timeout=None</arg>
+</arguments>
+<doc>Send a PUT request on the session object found using the
+given `alias`
+
+``alias`` that will be used to identify the Session object in the cache
+
+``uri`` to send the PUT request to
+
+``data`` a dictionary of key-value pairs that will be urlencoded
+       and sent as PUT data
+       or binary data that is sent as the raw body content
+       or file descriptor retrieved by Get File For Streaming Upload
+
+``json`` a value that will be json encoded
+       and sent as PUT data if data is not specified
+
+``headers`` a dictionary of headers to use with the request
+
+``allow_redirects`` Boolean. Set to True if POST/PUT/DELETE redirect following is allowed.
+
+``params`` url parameters to append to the uri
+
+``timeout`` connection timeout</doc>
+</kw>
+<kw name="Request Should Be Successful" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="918">
+<arguments>
+<arg>response</arg>
+</arguments>
+<doc>Fails if response status code is a client or server error (4xx, 5xx).
+
+The ``response`` is the output of other requests keywords like ``Get Request``.
+
+In case of failure an HTTPError will be automatically raised.</doc>
+</kw>
+<kw name="Session Exists" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="540">
+<arguments>
+<arg>alias</arg>
+</arguments>
+<doc>Return True if the session has been already created
+
+``alias`` that has been used to identify the Session object in the cache</doc>
+</kw>
+<kw name="Status Should Be" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="904">
+<arguments>
+<arg>expected_status</arg>
+<arg>response</arg>
+<arg>msg=None</arg>
+</arguments>
+<doc>Fails if response status code is different than the expected.
+
+``expected_status`` could be the code number as an integer or as string.
+But it could also be a named status code like 'ok', 'created', 'accepted' or
+'bad request', 'not found' etc.
+
+The ``response`` is the output of other requests keywords like ``Get Request``.
+
+A custom message ``msg`` can be added to work like built in keywords.</doc>
+</kw>
+<kw name="To Json" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="568">
+<arguments>
+<arg>content</arg>
+<arg>pretty_print=False</arg>
+</arguments>
+<doc>Convert a string to a JSON object
+
+``content`` String content to convert into JSON
+
+``pretty_print`` If defined, will output JSON is pretty print format</doc>
+</kw>
+<kw name="Update Session" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\RequestsLibrary\RequestsKeywords.py" lineno="557">
+<arguments>
+<arg>alias</arg>
+<arg>headers=None</arg>
+<arg>cookies=None</arg>
+</arguments>
+<doc>Update Session Headers: update a HTTP Session Headers
+
+``alias`` Robot Framework alias to identify the session
+
+``headers`` Dictionary of headers merge into session</doc>
+</kw>
+</keywordspec>
