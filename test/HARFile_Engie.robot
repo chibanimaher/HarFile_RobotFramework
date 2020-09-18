@@ -1,6 +1,6 @@
 *** Settings ***
 Library    DateTime
-Documentation               This is just a BrowserMob Proxy Library tutorial
+Documentation               Harfile&GAnalytics
 ...
 Metadata                    VERSION     0.1
 Library                     SeleniumLibrary
