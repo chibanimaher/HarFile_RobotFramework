@@ -24,11 +24,16 @@ Config_Proxy
     ## Init BrowserMob Proxy
     Start Local Server      C:/Users/chiheb/Desktop/browsermob-proxy-2.1.4/bin/browsermob-proxy.bat
 
-    ## Create dedicated proxy on BrowserMob Proxy
-    ${BrowserMob_Proxy}=    Create Proxy
-
-    ## Configure Webdriver to use BrowserMob Proxy
-    Create Webdriver        ${BROWSER}    proxy=${BrowserMob_Proxy}
+    ## specify port proxy on BrowserMob Proxy
+    &{port}    Create Dictionary    port=8085
+   # Create dedicated proxy on BrowserMob Proxy
+    ${BrowserMob_Proxy}=    Create Proxy    ${port}
+    # Configure Webdriver to use BrowserMob Proxy
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    Call Method    ${options}    add_argument    --proxy\=${BrowserMob_Proxy}
+    Call Method    ${options}    add_argument    --allow-running-insecure-content
+    Call Method    ${options}    add_argument    --disable-web-security
+    Create WebDriver    Chrome    chrome_options=${options}
 
 Close Browsers
     Close All Browsers

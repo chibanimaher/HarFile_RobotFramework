@@ -1,9 +1,9 @@
-[INFO  2020-09-18T10:58:01,151 net.lightbody.bmp.proxy.Main] (main) Starting BrowserMob Proxy version 2.1.4 
-[INFO  2020-09-18T10:58:01,229 org.eclipse.jetty.util.log] (main) jetty-7.x.y-SNAPSHOT 
-[INFO  2020-09-18T10:58:01,644 org.eclipse.jetty.util.log] (main) started o.e.j.s.ServletContextHandler{/,null} 
-[WARN  2020-09-18T10:58:01,901 org.eclipse.jetty.util.log] (main) FAILED SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use: bind 
-[WARN  2020-09-18T10:58:01,902 org.eclipse.jetty.util.log] (main) FAILED org.eclipse.jetty.server.Server@663411de: java.net.BindException: Address already in use: bind 
-[ERROR 2020-09-18T10:58:01,903 net.lightbody.bmp.proxy.Main] (main) Failed to start Jetty server. Aborting. java.net.BindException: Address already in use: bind
+[INFO  2020-09-18T17:05:50,294 net.lightbody.bmp.proxy.Main] (main) Starting BrowserMob Proxy version 2.1.4 
+[INFO  2020-09-18T17:05:50,372 org.eclipse.jetty.util.log] (main) jetty-7.x.y-SNAPSHOT 
+[INFO  2020-09-18T17:05:50,777 org.eclipse.jetty.util.log] (main) started o.e.j.s.ServletContextHandler{/,null} 
+[WARN  2020-09-18T17:05:51,030 org.eclipse.jetty.util.log] (main) FAILED SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use: bind 
+[WARN  2020-09-18T17:05:51,031 org.eclipse.jetty.util.log] (main) FAILED org.eclipse.jetty.server.Server@663411de: java.net.BindException: Address already in use: bind 
+[ERROR 2020-09-18T17:05:51,032 net.lightbody.bmp.proxy.Main] (main) Failed to start Jetty server. Aborting. java.net.BindException: Address already in use: bind
 	at sun.nio.ch.Net.bind0(Native Method) ~[?:1.8.0_261]
 	at sun.nio.ch.Net.bind(Unknown Source) ~[?:1.8.0_261]
 	at sun.nio.ch.Net.bind(Unknown Source) ~[?:1.8.0_261]
