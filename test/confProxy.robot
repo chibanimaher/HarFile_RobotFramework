@@ -21,9 +21,6 @@ Start Browser
           ## Configure Webdriver to use BrowserMob Proxy
           Create Webdriver        ${BROWSER}    proxy=${BrowserMob_Proxy}
       
-          Close Browser
-          Close All Browsers
-          Stop Local Server
 *** Test Cases ***
 Check something
           [Documentation]         Check the page title
@@ -33,8 +30,7 @@ Check something
     Maximize Browser Window
     Click Element    xpath=//*[@id='engie_fournisseur_d_electricite_et_de_gaz_naturel_headerhp_souscrire_a_une_offre_d_energie']    
     Sleep    2    
-      
-          ${har}=                 Get Har As JSON
+          ${har}=                 Get Har
           create file             ${EXECDIR}${/}file.har     ${har}
           log to console          Browsermob Proxy HAR file saved as ${EXECDIR}${/}file.har
           Sleep    20    

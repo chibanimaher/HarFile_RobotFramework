@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keywordspec name="HttpCtrl.Client" type="LIBRARY" format="ROBOT" scope="TEST" namedargs="true" generated="2020-09-18T08:15:32Z" specversion="2" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\HttpCtrl\__init__.py" lineno="38">
+<version />
+<scope>test case</scope>
+<namedargs>yes</namedargs>
+<doc>HTTP/HTTPS Client Library that provides comprehensive interface to Robot Framework to control HTTP/HTTPS client.
+
+See other HttpCtrl libraries:
+
+- HttpCtrl.Server_ - HTTP Server API for testing where easy-controlled HTTP server is required.
+
+- HttpCtrl.Json_ - Json related API for testing where work with Json message is required.
+
+.. _HttpCtrl.Server: server.html
+.. _HttpCtrl.Json: json.html
+
+Example how to send GET request to obtain origin IP address and check that response is not empty:
+
+.. code:: robotframework
+
+    *** Settings ***
+
+    Library         HttpCtrl.Client
+    Library         HttpCtrl.Json
+
+    *** Test Cases ***
+
+    Get Origin Address
+        Initialize Client   www.httpbin.org
+        Send HTTP Request   GET   /ip
+
+        ${response status}=   Get Response Status
+        ${response body}=     Get Response Body
+
+        ${expected status}=   Convert To Integer   200
+        Should Be Equal   ${response status}   ${expected status}
+
+        ${origin}=    Get Json Value From String   ${response body}   origin
+        Should Not Be Empty   ${origin}
+
+Example how to sent PATCH request using HTTPS:
+
+.. code:: robotframework
+
+    *** Settings ***
+
+    Library         HttpCtrl.Client
+    Library         HttpCtrl.Json
+
+    *** Test Cases ***
+
+    Send HTTPS PATCH Request
+        Initialize Client   www.httpbin.org
+
+        ${body}=   Set Variable   { "volume": 77, "mute": false }
+        Send HTTPS Request   PATCH   /patch   ${body}
+
+        ${response status}=   Get Response Status
+        ${response body}=     Get Response Body
+
+        ${expected status}=   Convert To Integer   200
+        Should Be Equal   ${response status}   ${expected status}
+
+        ${volume}=   Get Json Value From String   ${response body}   json/volume
+        Should Be Equal   ${volume}   ${77}
+
+        ${mute}=   Get Json Value From String   ${response body}   json/mute
+        Should Be Equal   ${mute}   ${False}</doc>
+<kw name="Get Async Response" lineno="447">
+<arguments>
+<arg>connection</arg>
+<arg>timeout=0</arg>
+</arguments>
+<doc>Return response as an object for the specified connection. This method should be called once after
+'Send HTTP Request Async' or 'Send HTTPS Request Async'. It returns None if there is no response for the
+specified connection.
+
+`connection` [in] (object): Connection for that response should be obtained.
+
+`timeout` [in] (int): Period of time in seconds to obtain response (by default is 0).
+
+Example how to get response object:
+
++--------------+--------------------+
+| ${response}= | Get Async Response |
++--------------+--------------------+
+
+Example how to try to get response object during 10 seconds:
+
++--------------+--------------------+----+
+| ${response}= | Get Async Response | 10 |
++--------------+--------------------+----+
+
+.. code:: text
+
+    ${connection}=   Send HTTP Async Request   POST            /post   Hello Server!
+    ${response}=     Get Async Response        ${connection}   5</doc>
+</kw>
+<kw name="Get Body From Response" lineno="551">
+<arguments>
+<arg>response</arg>
+</arguments>
+<doc>Return response body as a string from the specified response object that was obtained by function
+'Get Async Response'. Return 'None' if response object is None.
+
+Example how to get response code from a response object:
+
++-------------------+------------------------+-------------+
+| ${response body}= | Get Body From Response | ${response} |
++-------------------+------------------------+-------------+
+
+.. code:: text
+
+    ${connection}=      Send HTTP Async Request   GET             /get
+
+    # Some other actions ...
+
+    ${response}=        Get Async Response        ${connection}   5
+    ${response body}=   Get Body From Response    ${response}</doc>
+</kw>
+<kw name="Get Headers From Response" lineno="522">
+<arguments>
+<arg>response</arg>
+</arguments>
+<doc>Return response headers as a map from the specified response object that was obtained by function
+'Get Async Response'. Return 'None' if response object is None.
+
+Example how to get response headers from a response object:
+
++----------------------+---------------------------+-------------+
+| ${response headers}= | Get Headers From Response | ${response} |
++----------------------+---------------------------+-------------+
+
+.. code:: text
+
+    ${connection}=      Send HTTP Async Request   GET             /get
+
+    # Some other actions ...
+
+    ${response}=           Get Async Response          ${connection}   5
+    ${response headers}=   Get Headers From Response   ${response}</doc>
+</kw>
+<kw name="Get Response Body" lineno="423">
+<arguments>
+</arguments>
+<doc>Return response body as a string. This method should be called once after 'Send HTTP Request' or
+'Send HTTPS Request'. It returns None, in case of attempt to get response code more then once or if
+'Send HTTP Request' or 'Send HTTPS Request' is not called before.
+
+Example how to get response code:
+
++-------------------+-------------------+
+| ${response body}= | Get Response Body |
++-------------------+-------------------+
+
+.. code:: text
+
+    ${response body}=   Get Response Body</doc>
+</kw>
+<kw name="Get Response Headers" lineno="399">
+<arguments>
+</arguments>
+<doc>Return response headers as a dictionary. This method should be called once after 'Send HTTP Request' or
+'Send HTTPS Request'. It returns None, in case of attempt to get response code more then once or if
+'Send HTTP Request' or 'Send HTTPS Request' is not called before.
+
+Example how to get response code:
+
++----------------------+----------------------+
+| ${response headers}= | Get Response Headers |
++----------------------+----------------------+
+
+.. code:: text
+
+    ${response headers}=   Get Response Headers</doc>
+</kw>
+<kw name="Get Response Status" lineno="375">
+<arguments>
+</arguments>
+<doc>Return response code as an integer value. This method should be called once after 'Send HTTP Request' or
+'Send HTTPS Request'. It returns None, in case of attempt to get response code more then once or if
+'Send HTTP Request' or 'Send HTTPS Request' is not called before.
+
+Example how to get response code:
+
++---------------------+---------------------+
+| ${response status}= | Get Response Status |
++---------------------+---------------------+
+
+.. code:: text
+
+    ${response status}=   Get Response Status</doc>
+</kw>
+<kw name="Get Status From Response" lineno="493">
+<arguments>
+<arg>response</arg>
+</arguments>
+<doc>Return response status as an integer value from the specified response object that was obtained by function
+'Get Async Response'. Return 'None' if response object is None.
+
+Example how to get response status from a response object:
+
++---------------------+--------------------------+-------------+
+| ${response status}= | Get Status From Response | ${response} |
++---------------------+--------------------------+-------------+
+
+.. code:: text
+
+    ${connection}=      Send HTTP Async Request   GET             /get
+
+    # Some other actions ...
+
+    ${response}=          Get Async Response         ${connection}   5
+    ${response status}=   Get Status From Response   ${response}</doc>
+</kw>
+<kw name="Initialize Client" lineno="122">
+<arguments>
+<arg>host</arg>
+<arg>port=None</arg>
+</arguments>
+<doc>Initialize client using host and port of a server which will be used for communication.
+
+`host` [in] (string): Host of a server which client will use for communication.
+
+`port` [in] (string|integer): Port of a server which client will use for communication. Optional argument.
+
+Example when server is located on machine with address 192.168.0.1 and port 8000:
+
++-------------------+-------------+------+
+| Initialize Client | 192.168.0.1 | 8000 |
++-------------------+-------------+------+
+
+.. code:: text
+
+    Initialize Client   192.168.0.1   8000
+
+Example when your server has name:
+
++-------------------+-----------------+
+| Initialize Client | www.httpbin.org |
++-------------------+-----------------+
+
+.. code:: text
+
+    Initialize Client   www.httpbin.org</doc>
+</kw>
+<kw name="Send Http Request" lineno="231">
+<arguments>
+<arg>method</arg>
+<arg>url</arg>
+<arg>body=None</arg>
+</arguments>
+<doc>Send HTTP request with specified parameters. This function is blocked until server replies or
+timeout connection.
+
+`method` [in] (string): Method that is used to send request (GET, POST, PUT, DELETE, etc., see: RFC 7231, RFC 5789).
+
+`url` [in] (string): Path to the resource, for example, in case address www.httpbin.org/ip - '/ip' is an path.
+
+`body` [in] (string): Body of the request.
+
+Example where GET request is sent to server:
+
++-------------------+-----+-----+
+| Send HTTP Request | GET | /ip |
++-------------------+-----+-----+
+
+.. code:: text
+
+    Send HTTP Request   GET   /ip
+
+Example where POST request is sent with specific body:
+
++-------------------+------+-------+-------------------------------+
+| Send HTTP Request | POST | /post | { "message": "Hello World!" } |
++-------------------+------+-------+-------------------------------+
+
+.. code:: text
+
+    ${body}=   Set Variable   { "message": "Hello World!" }
+    Send HTTP Request   POST   /post   ${body}</doc>
+</kw>
+<kw name="Send Http Request Async" lineno="268">
+<arguments>
+<arg>method</arg>
+<arg>url</arg>
+<arg>body=None</arg>
+</arguments>
+<doc>Send HTTP request with specified parameters asynchronously. Non-blocking function to send request that waits
+for reply using separate thread. Return connection object that is used as a key to get asynchronous response
+using function 'Get Async Response'.
+
+`method` [in] (string): Method that is used to send request (GET, POST, PUT, DELETE, etc., see: RFC 7231, RFC 5789).
+
+`url` [in] (string): Path to the resource, for example, in case address www.httpbin.org/ip - '/ip' is an path.
+
+`body` [in] (string): Body of the request.
+
+Example where PUT request is sent with specific body:
+
++----------------+-------------------------+-----+------+---------------+
+| ${connection}= | Send HTTP Request Async | PUT | /put | Hello Server! |
++----------------+-------------------------+-----+------+---------------+
+
+.. code:: text
+
+    ${connection}=   Send HTTP Request Async   PUT   /put   Hello Server!</doc>
+</kw>
+<kw name="Send Https Request" lineno="295">
+<arguments>
+<arg>method</arg>
+<arg>url</arg>
+<arg>body=None</arg>
+</arguments>
+<doc>Send HTTPS request with specified parameters.
+
+`method` [in] (string): Method that is used to send request (GET, POST, DELETE, etc., see: RFC 7231, RFC 5789).
+
+`url` [in] (string): Path to the resource, for example, in case address www.httpbin.org/ip - '/ip' is an path.
+
+`body` [in] (string): Body of the request.
+
+Example where PATCH request to update parameters:
+
++--------------------+-------+--------+---------------------------------+
+| Send HTTPS Request | PATCH | /patch | { "volume": 77, "mute": false } |
++--------------------+-------+--------+---------------------------------+
+
+.. code:: text
+
+    ${body}=   Set Variable   { "volume": 77, "mute": false }
+    Send HTTPS Request   PATCH   /patch   ${body}</doc>
+</kw>
+<kw name="Send Https Request Async" lineno="321">
+<arguments>
+<arg>method</arg>
+<arg>url</arg>
+<arg>body=None</arg>
+</arguments>
+<doc>Send HTTPS request with specified parameters asynchronously. Non-blocking function to send request that waits
+for reply using separate thread. Return connection object that is used as a key to get asynchronous response
+using function 'Get Async Response'.
+
+`method` [in] (string): Method that is used to send request (GET, POST, DELETE, etc., see: RFC 7231, RFC 5789).
+
+`url` [in] (string): Path to the resource, for example, in case address www.httpbin.org/ip - '/ip' is an path.
+
+`body` [in] (string): Body of the request.
+
+Example where DELETE request is sent with specific body:
+
++----------------+--------------------------+--------+---------+
+| ${connection}= | Send HTTPS Request Async | DELETE | /delete |
++----------------+--------------------------+--------+---------+
+
+.. code:: text
+
+    ${connection}=   Send HTTPS Request Async   DELETE   /delete</doc>
+</kw>
+<kw name="Set Request Header" lineno="348">
+<arguments>
+<arg>key</arg>
+<arg>value</arg>
+</arguments>
+<doc>Set HTTP header for request that is going to be sent. Should be called before 'Send HTTP Request' or
+'Send HTTPS Request'.
+
+`key` [in] (string): Header name that should be used in the request (be aware of case-sensitive headers).
+
+`value` [in] (string): Value that corresponds to specified header.
+
+Example where several specific headers 'Content-Type' and 'Some Header' are set to request:
+
++--------------------+------------------+-------------------+
+| Set Request Header | Important-Header | important-value   |
++--------------------+------------------+-------------------+
+| Set Request Header | Some-Header      | some-value-for-it |
++--------------------+------------------+-------------------+
+
+.. code:: text
+
+    Set Request Header   Important-Header   important-value
+    Set Request Header   Some-Header        some-value-for-it</doc>
+</kw>
+</keywordspec>

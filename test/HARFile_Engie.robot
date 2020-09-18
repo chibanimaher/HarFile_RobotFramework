@@ -8,11 +8,11 @@ Library  BrowserMobProxyLibrary
 
 *** Variables ***
 ${PAGE_URL}    https://particuliers.engie.fr?env_work=acc
-${HUB}                     http://10.75.140.195:25355/wd/hub
+${HUB}         http://10.75.138.250:3274/wd/hub
 ${port}    
-${BMP_HOST}  10.75.140.195
+${BMP_HOST}  10.75.138.250
 ${BMP_PORT}  4444
-${SELENIUM}  http://10.75.140.195:4444/wd/hub
+${SELENIUM}  http://10.75.138.250:4444/wd/hub
 ${SHOT_NUM}  0
 @{TIMINGS}
 ${PATH}           ${CURDIR}/test/Har_Result.txt
@@ -49,6 +49,10 @@ Get Requests
     Create Session    engie         ${url}
     ${resp}=          Get Request    engie               /
     Status Should Be  200            ${resp}
+    Should Be Equal     ${resp.status_code} =    200    
+    Log To Console    ${resp.status_code}   
+    Log To Console    ${resp.content}      
+    Log To Console    ************fin request****************    
 Screenshot
   ${SHOT_NUM}  Evaluate  ${SHOT_NUM} + 1
   Set Global Variable  ${SHOT_NUM}
@@ -136,7 +140,8 @@ Close Proxy
   Should Be Equal As Strings  ${resp.status_code}  200
   Log  Delete proxy at ${port} [${resp.status_code}]
 *** Test Cases ***
-Selenium hub Chrome - Create Webdriver
+Home Engie
+    New Har    engie
     &{options} =	Create Dictionary	browserName=chrome	platform=ANY
     Log  Selenium capabilities: ${options}
     Create Webdriver    Remote   command_executor=${HUB}    desired_capabilities=${options}
@@ -146,14 +151,8 @@ Selenium hub Chrome - Create Webdriver
     Click Element    xpath=//*[@id='engie_fournisseur_d_electricite_et_de_gaz_naturel_headerhp_souscrire_a_une_offre_d_energie']    
     Sleep    2  
     log     ******tarfic registred*************
+    BrowserMobProxyLibrary.Get Har
     Get Requests
-    Create File    ${PATH}    # Text file created at current directory
-    : FOR    ${i}    IN RANGE    1  6
-    \    log to console  ${i}
-    \    ${b}=  Convert To String  ${i}     #conversion was required as it was throwing encoding error for integer
-    \    Append To File  ${PATH}  ${b}
-    #File Should Exist    ${PATH}    ${i}      #This was causing error to me, hence commented
-    Log    Exited
     Close All Browsers
   
     

@@ -1,546 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.2.2 (Python 3.8.5 on win32)" generated="20200915 10:54:06.582" rpa="false">
+<robot generator="Robot 3.2.2 (Python 3.8.5 on win32)" generated="20200918 10:57:57.635" rpa="false">
 <suite id="s1" name="Engie" source="C:\Users\chiheb\eclipse-workspace\Engie">
 <suite id="s1-s1" name="Test" source="C:\Users\chiheb\eclipse-workspace\Engie\test">
-<suite id="s1-s1-s1" name="HARFile Engie" source="C:\Users\chiheb\eclipse-workspace\Engie\test\HARFile_Engie.robot">
-<test id="s1-s1-s1-t1" name="Selenium hub Chrome - Create Webdriver">
+<suite id="s1-s1-s1" name="Test2Prov" source="C:\Users\chiheb\eclipse-workspace\Engie\test\test2prov.robot">
+<test id="s1-s1-s1-t1" name="Config_Proxy">
+<kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<arguments>
+<arg>10</arg>
+</arguments>
+<status status="PASS" starttime="20200918 10:57:58.876" endtime="20200918 10:57:58.877"></status>
+</kw>
+<kw name="Start Local Server" library="BrowserMobProxyLibrary">
+<doc>Start local Browsermob Proxy Server instance</doc>
+<arguments>
+<arg>C:/Users/chiheb/Desktop/browsermob-proxy-2.1.4/bin/browsermob-proxy.bat</arg>
+</arguments>
+<status status="PASS" starttime="20200918 10:57:58.877" endtime="20200918 10:57:58.884"></status>
+</kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
-<arg>browserName=chrome</arg>
-<arg>platform=ANY</arg>
+<arg>port=8085</arg>
 </arguments>
 <assign>
-<var>&amp;{options}</var>
+<var>&amp;{port}</var>
 </assign>
-<msg timestamp="20200915 10:54:07.257" level="INFO">&amp;{options} = { browserName=chrome | platform=ANY }</msg>
-<status status="PASS" starttime="20200915 10:54:07.255" endtime="20200915 10:54:07.257"></status>
+<msg timestamp="20200918 10:57:58.888" level="INFO">&amp;{port} = { port=8085 }</msg>
+<status status="PASS" starttime="20200918 10:57:58.885" endtime="20200918 10:57:58.888"></status>
 </kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
+<kw name="Create Proxy" library="BrowserMobProxyLibrary">
+<doc>Creates proxy.</doc>
 <arguments>
-<arg>Selenium capabilities: ${options}</arg>
+<arg>${port}</arg>
 </arguments>
-<msg timestamp="20200915 10:54:07.258" level="INFO">Selenium capabilities: {'browserName': 'chrome', 'platform': 'ANY'}</msg>
-<status status="PASS" starttime="20200915 10:54:07.257" endtime="20200915 10:54:07.258"></status>
+<assign>
+<var>${BrowserMob_Proxy}</var>
+</assign>
+<msg timestamp="20200918 10:57:58.902" level="INFO">${BrowserMob_Proxy} = &lt;browsermobproxy.client.Client object at 0x04236910&gt;</msg>
+<status status="PASS" starttime="20200918 10:57:58.889" endtime="20200918 10:57:58.903"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+</arguments>
+<assign>
+<var>${options}</var>
+</assign>
+<msg timestamp="20200918 10:57:58.904" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x04236FB8&gt;</msg>
+<status status="PASS" starttime="20200918 10:57:58.903" endtime="20200918 10:57:58.904"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--proxy\=${BrowserMob_Proxy}</arg>
+</arguments>
+<status status="PASS" starttime="20200918 10:57:58.905" endtime="20200918 10:57:58.906"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--allow-running-insecure-content</arg>
+</arguments>
+<status status="PASS" starttime="20200918 10:57:58.906" endtime="20200918 10:57:58.907"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-web-security</arg>
+</arguments>
+<status status="PASS" starttime="20200918 10:57:58.907" endtime="20200918 10:57:58.908"></status>
 </kw>
 <kw name="Create Webdriver" library="SeleniumLibrary">
 <doc>Creates an instance of Selenium WebDriver.</doc>
 <arguments>
-<arg>Remote</arg>
-<arg>command_executor=${HUB}</arg>
-<arg>desired_capabilities=${options}</arg>
+<arg>Chrome</arg>
+<arg>chrome_options=${options}</arg>
 </arguments>
-<msg timestamp="20200915 10:54:07.260" level="INFO">Creating an instance of the Remote WebDriver.</msg>
-<status status="PASS" starttime="20200915 10:54:07.259" endtime="20200915 10:54:10.724"></status>
+<msg timestamp="20200918 10:57:58.909" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" starttime="20200918 10:57:58.908" endtime="20200918 10:58:02.178"></status>
+</kw>
+<kw name="New Har" library="BrowserMobProxyLibrary">
+<doc>This sets a new HAR to be recorded</doc>
+<arguments>
+<arg>engie</arg>
+</arguments>
+<status status="PASS" starttime="20200918 10:58:02.179" endtime="20200918 10:58:02.192"></status>
 </kw>
 <kw name="Go To" library="SeleniumLibrary">
 <doc>Navigates the current browser window to the provided ``url``.</doc>
 <arguments>
 <arg>${PAGE_URL}</arg>
 </arguments>
-<msg timestamp="20200915 10:54:10.725" level="INFO">Opening url 'https://particuliers.engie.fr?env_work=acc'</msg>
-<status status="PASS" starttime="20200915 10:54:10.724" endtime="20200915 10:54:13.008"></status>
+<msg timestamp="20200918 10:58:02.194" level="INFO">Opening url 'https://particuliers.engie.fr?env_work=acc'</msg>
+<status status="PASS" starttime="20200918 10:58:02.193" endtime="20200918 10:58:04.965"></status>
 </kw>
-<kw name="Maximize Browser Window" library="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20200915 10:54:13.009" endtime="20200915 10:54:15.179"></status>
-</kw>
-<kw name="Capture Page Screenshot" library="SeleniumLibrary">
-<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<msg timestamp="20200915 10:54:16.418" level="INFO" html="yes">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-4.png"&gt;&lt;img src="selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
-<status status="PASS" starttime="20200915 10:54:15.180" endtime="20200915 10:54:16.419"></status>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<doc>Click the element identified by ``locator``.</doc>
-<arguments>
-<arg>xpath=//*[@id='engie_fournisseur_d_electricite_et_de_gaz_naturel_headerhp_souscrire_a_une_offre_d_energie']</arg>
-</arguments>
-<msg timestamp="20200915 10:54:16.420" level="INFO">Clicking element 'xpath=//*[@id='engie_fournisseur_d_electricite_et_de_gaz_naturel_headerhp_souscrire_a_une_offre_d_energie']'.</msg>
-<status status="PASS" starttime="20200915 10:54:16.419" endtime="20200915 10:54:18.292"></status>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>2</arg>
-</arguments>
-<msg timestamp="20200915 10:54:20.296" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20200915 10:54:18.293" endtime="20200915 10:54:20.296"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>******tarfic registred*************</arg>
-</arguments>
-<msg timestamp="20200915 10:54:20.298" level="INFO">******tarfic registred*************</msg>
-<status status="PASS" starttime="20200915 10:54:20.297" endtime="20200915 10:54:20.298"></status>
-</kw>
-<kw name="Get Requests">
-<kw name="Get Location" library="SeleniumLibrary">
-<doc>Returns the current browser window URL.</doc>
+<kw name="Get Har As Json" library="BrowserMobProxyLibrary">
+<doc>Returns the HAR that has been recorded as json</doc>
 <assign>
-<var>${url}</var>
+<var>${har}</var>
 </assign>
-<msg timestamp="20200915 10:54:20.723" level="INFO">${url} = https://particuliers.engie.fr/souscription/demande-souscription.html/choixCriteres?internalsource_medium=referral&amp;internalsource_source=site_particuliers&amp;internalsource_campaign=FMES&amp;internalsource_co...</msg>
-<status status="PASS" starttime="20200915 10:54:20.300" endtime="20200915 10:54:20.723"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>engie</arg>
-<arg>${url}</arg>
-</arguments>
-<msg timestamp="20200915 10:54:20.725" level="INFO">Creating Session using : alias=engie, url=https://particuliers.engie.fr/souscription/demande-souscription.html/choixCriteres?internalsource_medium=referral&amp;internalsource_source=site_particuliers&amp;internalsource_campaign=FMES&amp;internalsource_content=bouton_bandeau_HP.html, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20200915 10:54:20.723" endtime="20200915 10:54:20.726"></status>
-</kw>
-<kw name="Get Request" library="RequestsLibrary">
-<doc>Send a GET request on the session object found using the
-given `alias`</doc>
-<arguments>
-<arg>engie</arg>
-<arg>/</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20200915 10:54:21.051" level="INFO">GET Request : url=https://particuliers.engie.fr/souscription/demande-souscription.html/choixCriteres?internalsource_medium=referral&amp;internalsource_source=site_particuliers&amp;internalsource_campaign=FMES&amp;internalsource_content=bouton_bandeau_HP.html/ 
- path_url=/souscription/demande-souscription.html/choixCriteres?internalsource_medium=referral&amp;internalsource_source=site_particuliers&amp;internalsource_campaign=FMES&amp;internalsource_content=bouton_bandeau_HP.html/ 
- headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
- </msg>
-<msg timestamp="20200915 10:54:21.051" level="INFO">GET Response : url=https://particuliers.engie.fr/souscription/demande-souscription.html/choixCriteres?internalsource_medium=referral&amp;internalsource_source=site_particuliers&amp;internalsource_campaign=FMES&amp;internalsource_content=bouton_bandeau_HP.html/ 
- status=200, reason=OK 
- body=&lt;!DOCTYPE html&gt;&lt;!--[if IE 8]&gt;&lt;html lang="fr-FR" class="oldie ie8 no-js"&gt;&lt;![endif]--&gt;
-&lt;!--[if IE 9]&gt;&lt;html lang="fr-FR" class="oldie ie9 no-js"&gt;&lt;![endif]--&gt;
-&lt;!--[if !IE]&gt;&lt;!--&gt;
-&lt;html class="no-js" lang="fr-FR"&gt;&lt;!--&lt;![endif]--&gt;
-	
-
-	&lt;head&gt;
-			&lt;meta charset="utf-8"/&gt;
-	&lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/&gt;
-	&lt;meta name="format-detection" content="telephone=no"/&gt;
-	&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;
-	&lt;meta name="robots" content="noindex, nofollow"/&gt;
-
-	
-	
-
-	
-
-	&lt;script type="application/javascript"&gt;
-        var ABTest = {
-            'pageB': '\/content\/engie\/particuliers\/souscription\/demande\u002Dsouscription\u002Dcontrat',
-			'pourcentage': '10',
-			'ignoreSave': true,
-			'nomTest': '',
-			'nomVarianteA': '',
-			'nomVarianteB': ''
-		};
-        function getQueryParameterByName(e){var t=window.location.href;e=e.replace(/[\[\]]/g,"\\$&amp;");var a=new RegExp("[?&amp;]"+e+"(=([^&amp;#]*)|&amp;|#|$)").exec(t);return a?a[2]?decodeURIComponent(a[2].replace(/\+/g," ")):"":null}function getCookie(e){for(var t=e+"=",a=decodeURIComponent(document.cookie).split(";"),o=0;o&lt;a.length;o++){for(var n=a[o];" "==n.charAt(0);)n=n.substring(1);if(0==n.indexOf(t))return n.substring(t.length,n.length)}return""}function estJson(e){try{JSON.parse(e)}catch(e){return!1}return!0}var hasLocalStorage=!1;try{localStorage.setItem("testStorage","true"),localStorage.removeItem("testStorage"),hasLocalStorage=!0}catch(e){hasLocalStorage=!1}var pageB=ABTest.pageB,pourcentage=ABTest.pourcentage,ignoreSave=ABTest.ignoreSave,nomTest=ABTest.nomTest,nomVarianteA=ABTest.nomVarianteA,nomVarianteB=ABTest.nomVarianteB;-1===pageB.indexOf(".html")&amp;&amp;(pageB+=".html");var pageA=window.location.href,pageAPath=pageA.split(".html")[0],queryParams=pageA.split(".html")[1];function getItem(e){return(hasLocalStorage?window.localStorage.getItem(e):e.startsWith("VENTE-")?getCookie(e.slice("VENTE-".length)):getCookie(e))||null}function setItem(e,t){if(!e)return!1;hasLocalStorage?window.localStorage.setItem(e,t):e.startsWith("VENTE-")?document.cookie=e.slice("VENTE-".length)+"="+t:document.cookie=e+"="+t}pageB+=null==queryParams?"":queryParams;var querySave=getQueryParameterByName("save"),doIgnoreSave=ignoreSave&amp;&amp;null!=querySave,doABTest=!0;if(!doIgnoreSave){var storage=atob(getItem("ABTest")||"")||"{}";storage=estJson(storage)?storage:"{}";var abTestSettings=JSON.parse(storage);abTestSettings[btoa(pageAPath)]===nomTest+"-"+nomVarianteA?doABTest=!1:abTestSettings[btoa(pageAPath)]===nomTest+"-"+nomVarianteB&amp;&amp;(doABTest=!1,window.location.replace(pageB))}var nomVariante="";if(!doIgnoreSave&amp;&amp;doABTest){var rndm=Math.floor(100*Math.random());rndm&lt;pourcentage?(nomVariante=nomVarianteB,abTestSettings[btoa(pageAPath)]=nomTest+"-"+nomVarianteB,abTestSettings.ciblage_perso_optimizely=nomTest+":"+nomVarianteB,setItem("ABTest",btoa(JSON.stringify(abTestSettings)),1e4),window.location.replace(pageB)):(nomVariante=nomVarianteA,abTestSettings[btoa(pageAPath)]=nomTest+"-"+nomVarianteA,abTestSettings.ciblage_perso_optimizely=nomTest+":"+nomVarianteA,setItem("ABTest",btoa(JSON.stringify(abTestSettings)),1e5))}
-	&lt;/script&gt;
-
-    
-
-
-	
-
-
-	
-	&lt;script data-tpl="oldBrowsersBanner-tpl" type="text/template"&gt;
-    &lt;div class="c-oldBrowsersBanner__content"&gt;
-        &lt;div class="c-oldBrowsersBanner__img u-hideSmall"&gt;&lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAA+CAMAAACcE/x8AAAAMFBMVEX////s8vSfsriXlJSAgIDNzM3z3tez5/u87f//rYqizt7WkoJMXl9obW/vvbH0IDACpcRoAAAC5klEQVR42rXWi07rMAyA4fiS2I2Tnvd/2xO33UK0doMUfqExCvrkOR0QfhwghD+KGP9IRmaO8fcHh4S8lX4VjUjERwS/hiLxEIVfKfJr8c9oElW4L4Pwa6giAndhEd/zsizDurPITVyl05t9+Ch7Oj+yp9gsc9vIli1SeQTzskc73SPpwR1Z80CTGWWdtrt8rITaOtqDP5ZSC6r0YEruYy9WmWsppdlcLMpgz8qiWFrc2Gp1Ke6vMm2rfCkas1Vuel2YjSuPU4vODi1+S5sVs0a7bUYyBnOy08bmyzaPOj1hqwzFdWXaVGauzPRK69TQniIfMiExE2WdG1vPaNroGAI0mvPk2PJK531cRtw+kbw0uY9OH6HK1EGqnOQbHn5dT21ETkPuoc7RcE6r2VOWs2CajmY7TllnaT0fOtleVJXTdIJWxwBgbfAKALpfvE+r5pwFvLQm8CLXyih6k9bsf1bsoGHLisdZb9GKO+Nosn+WtqHLVhWdo7vsUYT4z1shWTniG7Tm8sjWaBsdrZZHWedpeirVUmryAiuXZzRPSy3dptXa0MalV+VnNIyb7jGZcR0u4dm/OpDgM03lQzzS/gHJbHXnzB/28aHc7RCirUvLrKlpWXYtrel12ZrLx1D7qrFUW7bA5TUkR/1FpPYswVca36F1PEj17bm953LYHsK6f23k6/rOqjkPG1Hh/fLD3gZudkqHXEuNz7GV39FSj4102eM1tSB4bh/Z9n0MMJwin9PK/R7RXMtRDEcjfiyAQL+eIl7Q+NxIl2sML4EfZX3uUfsp1nxBHy+KtB93TeE8LM9I9LFqvqKVjmf8vAbhqlj7rYWCxz4u6VzGKLwJeLxvvXxFi9TP8riUsSqX9PiWwvCpxCOBej218rX8efAq13SLR/kng9esb2nF6j9FKXy3RLXfg+9oUQB/W/8kiIgRQOUDDWG691NruBNc0wrhZnJKk8O3S8gvcOzwXT0ic/WYMH9z4P/Y6mC2/cMt3gAAAABJRU5ErkJggg==" alt=""&gt;&lt;/div&gt;
-        &lt;div class="c-oldBrowsersBanner__txt"&gt;
-            &lt;p class="c-oldBrowsersBanner__title"&gt;Votre navigateur n’est plus tout jeune…&lt;/p&gt;
-            &lt;p class="c-oldBrowsersBanner__desc u-hideSmall"&gt;Prenez une minute pour le mettre à jour et visiter notre site dans les meilleures conditions&amp;nbsp;!&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class="c-oldBrowsersBanner__btn"&gt;
-            &lt;div class="c-btnWrapper"&gt;
-                &lt;a class="c-baseBtn u-theme-bg u-theme-bg-hover" href="/erreur/page-navigateur-obsolete.html"&gt;
-                    &lt;span class="c-baseBtn__content"&gt;Mettre à jour&lt;/span&gt;
-                &lt;/a&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/script&gt;
-
-	
-	&lt;script&gt;// Script anciens navigateurs
-// IE/EDGE&gt;=11 Firefox&gt;=28 Chrome&gt;=29 iOS&gt;=9
-(function(){
-
-  "use strict";
-
-  var test = function(feat) { return document.createElement('div').style[feat] !== undefined; },
-      flex = function() { return test('flexWrap'); },
-      ie11 = function() { return !!window.MSInputMethodContext &amp;&amp; !!document.documentMode; };
-  if (!(flex() || ie11())) {
-    var dr = function(cb) {
-      if (document.addEventListener) {
-        document.addEventListener("DOMContentLoaded", function(){ return cb(); });
-      } else {
-        document.attachEvent("onreadystatechange", function(){ if (document.readyState === "complete") return cb(); });
-      }
-    };
-    dr(function() {
-      var oldBanner = document.querySelector('.c-oldBrowsersBanner');
-      if (oldBanner.hasAttribute('data-e-oldbrowsers')) {
-        var tplNode = document.querySelector('[data-tpl=oldBrowsersBanner-tpl]');
-        if (tplNode) {
-          var tpl = tplNode.innerHTML;
-          oldBanner.innerHTML = tpl;
-        }
-      } else {
-        oldBanner.className = oldBanner.className.replace('u-hide',' ');
-        document.documentElement.className += ' is-deprecated ';
-      }
-    });
-  }
-})();&lt;/script&gt;
-
-	
-	
-		
-    
-        
-    
-
-	
-    
-        
-            &lt;script&gt;if (window.performance.mark)
-                window.performance.mark('mark_optimizely_sync_init');&lt;/script&gt;
-            
-            &lt;script type="text/javascript" src="//cdn.optimizely.com/js/8662642154.js"&gt;&lt;/script&gt;
-            &lt;script&gt;if (window.performance.mark)
-                window.performance.mark('mark_optimizely_sync_end');&lt;/script&gt;
-        
-    
-
-
-	
-		
-	&lt;title&gt;Ma demande de contrat&lt;/title&gt;
-	&lt;meta name="description" content="Contrat ENGIE"/&gt;
-
-	
-		&lt;link href="https://particuliers.engie.fr/souscription/demande-souscription.html" rel="canonical"/&gt;
-	
-
-
-	
-	
-	&lt;link rel="preload" as="font" href="/etc/designs/business-factory/particuliers/fonts/icons.woff2" type="font/woff2" crossorigin/&gt;
-	
-	
-	
-    
-    
-&lt;link rel="stylesheet" href="/etc/designs/business-factory/particuliers/clientlibs/core-haut.min.8ea8bf84769cea25176bdd8693880eed.css" type="text/css"&gt;
-&lt;script type="text/javascript" src="/etc/designs/business-factory/particuliers/clientlibs/core-haut.min.6a1c9f5ac52d30e5635fa09d31808100.js"&gt;&lt;/script&gt;
-
-
-
-	
-	
-	
-	
-	
-    
-    
-    
-    
-
-
-	&lt;link rel="apple-touch-icon-precomposed" sizes="144x144" href="/etc/designs/business-factory/particuliers/images/favicon/apple-touch-icon-144x144.png"/&gt;
-&lt;link rel="apple-touch-icon-precomposed" sizes="114x114" href="/etc/designs/business-factory/particuliers/images/favicon/apple-touch-icon-114x114.png"/&gt;
-&lt;link rel="apple-touch-icon-precomposed" sizes="72x72" href="/etc/designs/business-factory/particuliers/images/favicon/apple-touch-icon-72x72.png"/&gt;
-&lt;link rel="apple-touch-icon-precomposed" href="/etc/designs/business-factory/particuliers/images/favicon/apple-touch-icon-57x57.png"/&gt;
-&lt;link rel="icon" href="/etc/designs/business-factory/particuliers/images/favicon/favicon.ico"/&gt;
-	
-	
-	
-	&lt;/head&gt;
-	
-	
-	
-	
-	
-	
-
-	
-
-	
-		&lt;div class="c-oldBrowsersBanner" data-e-oldbrowsers="data-e-oldbrowsers"&gt;&lt;/div&gt;
-
-		&lt;body class="u-theme-genBlue NA" data-dimelo="true" data-e-interchange-settings="{&amp;#34;lazySettings&amp;#34;: {}}"&gt;
-		
-	&lt;script type="text/javascript"&gt;
-    function createOrRefreshClientCookie(){
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", '/bin/engie/servlets/securisation/creationCookie?param=' + new Date().getTime());
-        xhttp.send();
-
-        setTimeout(createOrRefreshClientCookie, 1740000);
-    }
-    createOrRefreshClientCookie();
-&lt;/script&gt;
-
-	
-	
-
-	&lt;div class="l-wrapper l-wrapper--site u-shadow" id="backToTop"&gt;
-
-		
-		  	  
-    &lt;script&gt;
-      E.bannerApp = {
-        iOS:     'app-id=1104269908',
-        Android: 'app-id=com.engie.particuliers'
-      }      
-    &lt;/script&gt;
-    
-   &lt;!-- .c-bannerApp--&gt;
-	
-	
-	&lt;!-- end .c-bannerApp--&gt;
-
-		
-		
-
-	
-	
-
-
-		
-		
-
-		
-		&lt;main class="l-wrapper l-wrapper--mainFull u-bg-white" id="siteContent" role="main" data-e-sticky-container-main&gt;
-    &lt;div class="tel-v3-app parbase section"&gt;
-
-
-
-
-    
-
-
-
-&lt;script type="text/javascript"&gt;
-    var contribCMS = contribCMS || {};
-    var theme = "";
-    if (theme) {
-        theme = theme.toLowerCase();
-    }
-    var isModeClassique = !theme || theme === 'classique' || theme === 'dgme' || theme === 'engagement';
-
-    contribCMS.preSouscription = {
-        "affichagePage": {
-            "activerPagePreSouscription": "0" === "0" ? false : true,
-            "msgErreurPresous" : "Désolé, nous n\x27avons pas pu récupérer votre adresse via votre facture",
-            "TitrePesousGauche" : "Vous avez une facture d’énergie du logement concerné sous la main ? ",
-            "TitrePesousDroit" : "Entrez manuellement vos informations",
-        },
-        "modeAfficha... (set the log level to DEBUG or TRACE to see the full content) 
- </msg>
-<msg timestamp="20200915 10:54:21.052" level="INFO">C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\urllib3\connectionpool.py:981: InsecureRequestWarning: Unverified HTTPS request is being made to host 'particuliers.engie.fr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
-  warnings.warn(</msg>
-<msg timestamp="20200915 10:54:21.053" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20200915 10:54:20.727" endtime="20200915 10:54:21.053"></status>
-</kw>
-<kw name="Status Should Be" library="RequestsLibrary">
-<doc>Fails if response status code is different than the expected.</doc>
-<arguments>
-<arg>200</arg>
-<arg>${resp}</arg>
-</arguments>
-<status status="PASS" starttime="20200915 10:54:21.054" endtime="20200915 10:54:21.055"></status>
-</kw>
-<status status="PASS" starttime="20200915 10:54:20.299" endtime="20200915 10:54:21.056"></status>
+<msg timestamp="20200918 10:58:04.974" level="INFO">${har} = {"log": {"version": "1.2", "creator": {"name": "BrowserMob Proxy", "version": "2.1.4", "comment": ""}, "pages": [{"id": "engie", "startedDateTime": "2020-09-18T10:58:02.188+02:00", "title": "engie", "...</msg>
+<status status="PASS" starttime="20200918 10:58:04.966" endtime="20200918 10:58:04.975"></status>
 </kw>
 <kw name="Create File" library="OperatingSystem">
 <doc>Creates a file with the given content and encoding.</doc>
 <arguments>
-<arg>${PATH}</arg>
+<arg>${EXECDIR}${/}file.har</arg>
+<arg>${har}</arg>
 </arguments>
-<msg timestamp="20200915 10:54:21.059" level="INFO" html="yes">Created file '&lt;a href="file://C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt"&gt;C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt&lt;/a&gt;'.</msg>
-<status status="PASS" starttime="20200915 10:54:21.056" endtime="20200915 10:54:21.059"></status>
-</kw>
-<kw name="${i} IN RANGE [ 1 | 6 ]" type="for">
-<msg timestamp="20200915 10:54:21.060" level="WARN">Error in file 'C:\Users\chiheb\eclipse-workspace\Engie\test\HARFile_Engie.robot' in FOR loop starting on line 151: For loop header ': FOR' is deprecated. Use 'FOR' instead.</msg>
-<msg timestamp="20200915 10:54:21.060" level="WARN">Error in file 'C:\Users\chiheb\eclipse-workspace\Engie\test\HARFile_Engie.robot' in FOR loop starting on line 151: Marking for loop body with '\' is deprecated. Remove markers and use 'END' instead.</msg>
-<kw name="${i} = 1" type="foritem">
-<kw name="Log To Console" library="BuiltIn">
-<doc>Logs the given message to the console.</doc>
-<arguments>
-<arg>${i}</arg>
-</arguments>
-<status status="PASS" starttime="20200915 10:54:21.062" endtime="20200915 10:54:21.064"></status>
-</kw>
-<kw name="Convert To String" library="BuiltIn">
-<doc>Converts the given item to a Unicode string.</doc>
-<arguments>
-<arg>${i}</arg>
-</arguments>
-<assign>
-<var>${b}</var>
-</assign>
-<msg timestamp="20200915 10:54:21.067" level="INFO">${b} = 1</msg>
-<status status="PASS" starttime="20200915 10:54:21.065" endtime="20200915 10:54:21.067"></status>
-</kw>
-<kw name="Append To File" library="OperatingSystem">
-<doc>Appends the given content to the specified file.</doc>
-<arguments>
-<arg>${PATH}</arg>
-<arg>${b}</arg>
-</arguments>
-<msg timestamp="20200915 10:54:21.070" level="INFO" html="yes">Appended to file '&lt;a href="file://C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt"&gt;C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt&lt;/a&gt;'.</msg>
-<status status="PASS" starttime="20200915 10:54:21.068" endtime="20200915 10:54:21.070"></status>
-</kw>
-<status status="PASS" starttime="20200915 10:54:21.062" endtime="20200915 10:54:21.070"></status>
-</kw>
-<kw name="${i} = 2" type="foritem">
-<kw name="Log To Console" library="BuiltIn">
-<doc>Logs the given message to the console.</doc>
-<arguments>
-<arg>${i}</arg>
-</arguments>
-<status status="PASS" starttime="20200915 10:54:21.072" endtime="20200915 10:54:21.073"></status>
-</kw>
-<kw name="Convert To String" library="BuiltIn">
-<doc>Converts the given item to a Unicode string.</doc>
-<arguments>
-<arg>${i}</arg>
-</arguments>
-<assign>
-<var>${b}</var>
-</assign>
-<msg timestamp="20200915 10:54:21.075" level="INFO">${b} = 2</msg>
-<status status="PASS" starttime="20200915 10:54:21.074" endtime="20200915 10:54:21.075"></status>
-</kw>
-<kw name="Append To File" library="OperatingSystem">
-<doc>Appends the given content to the specified file.</doc>
-<arguments>
-<arg>${PATH}</arg>
-<arg>${b}</arg>
-</arguments>
-<msg timestamp="20200915 10:54:21.078" level="INFO" html="yes">Appended to file '&lt;a href="file://C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt"&gt;C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt&lt;/a&gt;'.</msg>
-<status status="PASS" starttime="20200915 10:54:21.076" endtime="20200915 10:54:21.079"></status>
-</kw>
-<status status="PASS" starttime="20200915 10:54:21.071" endtime="20200915 10:54:21.079"></status>
-</kw>
-<kw name="${i} = 3" type="foritem">
-<kw name="Log To Console" library="BuiltIn">
-<doc>Logs the given message to the console.</doc>
-<arguments>
-<arg>${i}</arg>
-</arguments>
-<status status="PASS" starttime="20200915 10:54:21.080" endtime="20200915 10:54:21.082"></status>
-</kw>
-<kw name="Convert To String" library="BuiltIn">
-<doc>Converts the given item to a Unicode string.</doc>
-<arguments>
-<arg>${i}</arg>
-</arguments>
-<assign>
-<var>${b}</var>
-</assign>
-<msg timestamp="20200915 10:54:21.083" level="INFO">${b} = 3</msg>
-<status status="PASS" starttime="20200915 10:54:21.082" endtime="20200915 10:54:21.084"></status>
-</kw>
-<kw name="Append To File" library="OperatingSystem">
-<doc>Appends the given content to the specified file.</doc>
-<arguments>
-<arg>${PATH}</arg>
-<arg>${b}</arg>
-</arguments>
-<msg timestamp="20200915 10:54:21.086" level="INFO" html="yes">Appended to file '&lt;a href="file://C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt"&gt;C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt&lt;/a&gt;'.</msg>
-<status status="PASS" starttime="20200915 10:54:21.084" endtime="20200915 10:54:21.087"></status>
-</kw>
-<status status="PASS" starttime="20200915 10:54:21.080" endtime="20200915 10:54:21.087"></status>
-</kw>
-<kw name="${i} = 4" type="foritem">
-<kw name="Log To Console" library="BuiltIn">
-<doc>Logs the given message to the console.</doc>
-<arguments>
-<arg>${i}</arg>
-</arguments>
-<status status="PASS" starttime="20200915 10:54:21.089" endtime="20200915 10:54:21.089"></status>
-</kw>
-<kw name="Convert To String" library="BuiltIn">
-<doc>Converts the given item to a Unicode string.</doc>
-<arguments>
-<arg>${i}</arg>
-</arguments>
-<assign>
-<var>${b}</var>
-</assign>
-<msg timestamp="20200915 10:54:21.091" level="INFO">${b} = 4</msg>
-<status status="PASS" starttime="20200915 10:54:21.090" endtime="20200915 10:54:21.091"></status>
-</kw>
-<kw name="Append To File" library="OperatingSystem">
-<doc>Appends the given content to the specified file.</doc>
-<arguments>
-<arg>${PATH}</arg>
-<arg>${b}</arg>
-</arguments>
-<msg timestamp="20200915 10:54:21.093" level="INFO" html="yes">Appended to file '&lt;a href="file://C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt"&gt;C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt&lt;/a&gt;'.</msg>
-<status status="PASS" starttime="20200915 10:54:21.091" endtime="20200915 10:54:21.093"></status>
-</kw>
-<status status="PASS" starttime="20200915 10:54:21.088" endtime="20200915 10:54:21.094"></status>
-</kw>
-<kw name="${i} = 5" type="foritem">
-<kw name="Log To Console" library="BuiltIn">
-<doc>Logs the given message to the console.</doc>
-<arguments>
-<arg>${i}</arg>
-</arguments>
-<status status="PASS" starttime="20200915 10:54:21.095" endtime="20200915 10:54:21.095"></status>
-</kw>
-<kw name="Convert To String" library="BuiltIn">
-<doc>Converts the given item to a Unicode string.</doc>
-<arguments>
-<arg>${i}</arg>
-</arguments>
-<assign>
-<var>${b}</var>
-</assign>
-<msg timestamp="20200915 10:54:21.096" level="INFO">${b} = 5</msg>
-<status status="PASS" starttime="20200915 10:54:21.096" endtime="20200915 10:54:21.097"></status>
-</kw>
-<kw name="Append To File" library="OperatingSystem">
-<doc>Appends the given content to the specified file.</doc>
-<arguments>
-<arg>${PATH}</arg>
-<arg>${b}</arg>
-</arguments>
-<msg timestamp="20200915 10:54:21.099" level="INFO" html="yes">Appended to file '&lt;a href="file://C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt"&gt;C:\Users\chiheb\eclipse-workspace\Engie\test\test\Har_Result.txt&lt;/a&gt;'.</msg>
-<status status="PASS" starttime="20200915 10:54:21.097" endtime="20200915 10:54:21.100"></status>
-</kw>
-<status status="PASS" starttime="20200915 10:54:21.094" endtime="20200915 10:54:21.100"></status>
-</kw>
-<status status="PASS" starttime="20200915 10:54:21.060" endtime="20200915 10:54:21.100"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>Exited</arg>
-</arguments>
-<msg timestamp="20200915 10:54:21.101" level="INFO">Exited</msg>
-<status status="PASS" starttime="20200915 10:54:21.101" endtime="20200915 10:54:21.101"></status>
+<msg timestamp="20200918 10:58:04.977" level="INFO" html="yes">Created file '&lt;a href="file://C:\Users\chiheb\eclipse-workspace\Engie\file.har"&gt;C:\Users\chiheb\eclipse-workspace\Engie\file.har&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20200918 10:58:04.975" endtime="20200918 10:58:04.977"></status>
 </kw>
 <kw name="Close All Browsers" library="SeleniumLibrary">
 <doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" starttime="20200915 10:54:21.102" endtime="20200915 10:54:21.174"></status>
+<status status="PASS" starttime="20200918 10:58:04.978" endtime="20200918 10:58:07.132"></status>
 </kw>
-<status status="PASS" starttime="20200915 10:54:07.253" endtime="20200915 10:54:21.176" critical="yes"></status>
+<kw name="Stop Local Server" library="BrowserMobProxyLibrary">
+<doc>This will stop the process running the Browsermob Proxy</doc>
+<status status="PASS" starttime="20200918 10:58:07.133" endtime="20200918 10:58:07.139"></status>
+</kw>
+<doc>Start chrome browser</doc>
+<status status="PASS" starttime="20200918 10:57:58.874" endtime="20200918 10:58:07.140" critical="yes"></status>
 </test>
-<doc>Selenium Grid + BMP</doc>
-<status status="PASS" starttime="20200915 10:54:06.690" endtime="20200915 10:54:21.184"></status>
+<doc>This is just a BrowserMob Proxy Library tutorial
+</doc>
+<status status="PASS" starttime="20200918 10:57:57.752" endtime="20200918 10:58:07.144"></status>
 </suite>
-<status status="PASS" starttime="20200915 10:54:06.685" endtime="20200915 10:54:21.193"></status>
+<status status="PASS" starttime="20200918 10:57:57.747" endtime="20200918 10:58:07.151"></status>
 </suite>
-<status status="PASS" starttime="20200915 10:54:06.637" endtime="20200915 10:54:21.199"></status>
+<status status="PASS" starttime="20200918 10:57:57.698" endtime="20200918 10:58:07.157"></status>
 </suite>
 <statistics>
 <total>
@@ -552,11 +149,9 @@ given `alias`</doc>
 <suite>
 <stat pass="1" fail="0" id="s1" name="Engie">Engie</stat>
 <stat pass="1" fail="0" id="s1-s1" name="Test">Engie.Test</stat>
-<stat pass="1" fail="0" id="s1-s1-s1" name="HARFile Engie">Engie.Test.HARFile Engie</stat>
+<stat pass="1" fail="0" id="s1-s1-s1" name="Test2Prov">Engie.Test.Test2Prov</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20200915 10:54:21.060" level="WARN">Error in file 'C:\Users\chiheb\eclipse-workspace\Engie\test\HARFile_Engie.robot' in FOR loop starting on line 151: For loop header ': FOR' is deprecated. Use 'FOR' instead.</msg>
-<msg timestamp="20200915 10:54:21.060" level="WARN">Error in file 'C:\Users\chiheb\eclipse-workspace\Engie\test\HARFile_Engie.robot' in FOR loop starting on line 151: Marking for loop body with '\' is deprecated. Remove markers and use 'END' instead.</msg>
 </errors>
 </robot>

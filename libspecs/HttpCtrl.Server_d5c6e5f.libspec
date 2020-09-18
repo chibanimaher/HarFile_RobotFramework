@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keywordspec name="HttpCtrl.Server" type="LIBRARY" format="ROBOT" scope="TEST" namedargs="true" generated="2020-09-18T08:16:14Z" specversion="2" source="C:\Users\chiheb\AppData\Local\Programs\Python\Python38-32\Lib\site-packages\HttpCtrl\__init__.py" lineno="581">
+<version />
+<scope>test case</scope>
+<namedargs>yes</namedargs>
+<doc>HTTP Server Library that provides comprehensive interface to Robot Framework to control HTTP server.
+
+See other HttpCtrl libraries:
+
+- HttpCtrl.Client_ - HTTP/HTTP Client API for testing where easy-controlled HTTP/HTTPS client is required.
+
+- HttpCtrl.Json_ - Json related API for testing where work with Json message is required.
+
+.. _HttpCtrl.Client: client.html
+.. _HttpCtrl.Json: json.html
+
+Here is an example of receiving POST request. In this example HTTP client sends POST request to HTTP server. HTTP
+server receives it and checks incoming request for correctness.
+
+.. code:: robotframework
+
+    *** Settings ***
+
+    Library         HttpCtrl.Client
+    Library         HttpCtrl.Server
+
+    Test Setup       Initialize HTTP Client And Server
+    Test Teardown    Terminate HTTP Server
+
+    *** Test Cases ***
+
+    Receive And Reply To POST
+        ${request body}=   Set Variable   { "message": "Hello!" }
+        Send HTTP Request Async   POST   /post   ${request body}
+
+        Wait For Request
+        Reply By   200
+
+        ${method}=   Get Request Method
+        ${url}=      Get Request Url
+        ${body}=     Get Request Body
+
+        Should Be Equal   ${method}   POST
+        Should Be Equal   ${url}      /post
+        Should Be Equal   ${body}     ${request body}
+
+    *** Keywords ***
+
+    Initialize HTTP Client And Server
+        Initialize Client   127.0.0.1   8000
+        Start Server        127.0.0.1   8000
+
+    Terminate HTTP Server
+        Stop Server</doc>
+<kw name="Get Request Body" lineno="865">
+<arguments>
+</arguments>
+<doc>Returns body of received request as a string. This function should be called after \`Wait For Request\`,
+otherwise None is returned.
+
+Example how to obtain body of incoming request:
+
++------------------+
+| Get Request Body |
++------------------+
+
+.. code:: text
+
+    Get Request Body</doc>
+</kw>
+<kw name="Get Request Headers" lineno="885">
+<arguments>
+</arguments>
+<doc>Returns headers of received request as a dictionary. This function should be called after \`Wait For Request\`,
+otherwise None is returned.
+
+Example how to obtain headers of incoming request:
+
++---------------------+
+| Get Request Headers |
++---------------------+
+
+.. code:: text
+
+    Get Request Headers</doc>
+</kw>
+<kw name="Get Request Method" lineno="845">
+<arguments>
+</arguments>
+<doc>Returns method of received request as a string. This function should be called after \`Wait For Request\`,
+otherwise None is returned.
+
+Example how to obtain method of incoming request:
+
++--------------------+
+| Get Request Method |
++--------------------+
+
+.. code:: text
+
+    Get Request Method</doc>
+</kw>
+<kw name="Get Request Url" lineno="905">
+<arguments>
+</arguments>
+<doc>Returns URL of received request as a string. This function should be called after \`Wait For Request\`,
+otherwise None is returned.
+
+Example how to obtain URL of incoming request:
+
++-----------------+
+| Get Request Url |
++-----------------+
+
+.. code:: text
+
+    Get Request Url</doc>
+</kw>
+<kw name="Reply By" lineno="961">
+<arguments>
+<arg>status</arg>
+<arg>body=None</arg>
+</arguments>
+<doc>Send response using specified HTTP code and body. This function should be called after \`Wait For Request\`.
+
+`status` [in] (string): HTTP status code for response.
+`body` [in] (string): Body that should contain response.
+
+Example how to reply by 204 (No Content) to incoming request:
+
++----------+-----+
+| Reply By | 204 |
++----------+-----+
+
+.. code:: text
+
+    Reply By   204
+
+Example how to reply 200 (OK) with body to incoming request:
+
++----------+-----+--------------------------+
+| Reply By | 200 | { "status": "accepted" } |
++----------+-----+--------------------------+
+
+.. code:: text
+
+    ${response body}=   Set Variable   { "status": "accepted" }
+    Reply By   204   ${response body}</doc>
+</kw>
+<kw name="Set Reply Header" lineno="925">
+<arguments>
+<arg>key</arg>
+<arg>value</arg>
+</arguments>
+<doc>Set or insert new (if it does not exist yet) header to HTTP response. To send response itself function
+\`Reply By\` is used.
+
+`key` [in] (string): HTTP header name.
+`value` [in] (string): HTTP header value.
+
+Example how to set header for HTTP response:
+
++------------------+--------+----------------+
+| Set Reply Header | Origin | 127.0.0.1:8000 |
++------------------+--------+----------------+
+
+.. code:: text
+
+    Set Reply Header   Origin   127.0.0.1:8000
+
+Example how to set several headers for HTTP response:
+
++------------------+-------------+----------------+
+| Set Reply Header | Origin      | 127.0.0.1:8001 |
++------------------+-------------+----------------+
+| Set Reply Header | City-Source | St.-Petersburg |
++------------------+-------------+----------------+
+
+.. code:: text
+
+    Set Reply Header   Origin        127.0.0.1:8000
+    Set Reply Header   City-Source   St.-Petersburg</doc>
+</kw>
+<kw name="Start Server" lineno="644">
+<arguments>
+<arg>host</arg>
+<arg>port</arg>
+</arguments>
+<doc>Start HTTP server on specific address and port. Server should be closed when it is not required, for example,
+when test is over. In case of double call of \`Start Server\`, the previous will be stopped and only then the
+next one HTTP server will be started.
+
+`host` [in] (string): Address that will be used by HTTP server to listen.
+
+`port` [in] (string): Port that will be used by HTTP server to listen.
+
+Example how to initialize server:
+
++--------------+-----------+------+
+| Start Server | 127.0.0.1 | 8000 |
++--------------+-----------+------+
+
+.. code:: text
+
+    Start Server   127.0.0.1   8000
+
+It is a good practice to start server and stop it using 'Test Setup' and 'Test Teardown', for example:
+
+.. code:: robotframework
+
+    *** Settings ***
+
+    Library         HttpCtrl.Server
+
+    Test Setup       Initialize HTTP Server
+    Test Teardown    Terminate HTTP Server
+
+    *** Test Cases ***
+
+    HTTP Server Based Test
+        Wait For Request
+        Reply By   200
+
+        # Check incoming request
+
+    *** Keywords ***
+
+    Initialize HTTP Server
+        Start Server        127.0.0.1   8000
+
+    Terminate HTTP Server
+        Stop Server</doc>
+</kw>
+<kw name="Stop Server" lineno="706">
+<arguments>
+</arguments>
+<doc>Stop HTTP server if it has been started. This function should be called if server has been started.
+
+Example how to stop server:
+
++-------------+
+| Stop Server |
++-------------+
+
+.. code:: text
+
+    Stop Server
+
+It is a good practice to start server and stop it using `Test Setup` and `Test Teardown` - see example for
+\`Start Server\`.</doc>
+</kw>
+<kw name="Wait And Ignore Request" lineno="820">
+<arguments>
+</arguments>
+<doc>Command to server to wait incoming request and ignore it by closing connection. This call is blocked until HTTP
+request arrives. Basically server receives all requests after \`Start Server\` and places them to internal
+queue. When test call function \`Wait And Ignore Request\` it checks the queue and if it is not empty returns
+the first request in the queue is ignore and connection is closed. If the queue is empty then function waits
+when the server receives request and place it to the queue.
+
+Example how to wait and ignore request.
+
++-------------------------+
+| Wait And Ignore Request |
++-------------------------+
+
+.. code:: text
+
+    Wait And Ignore Request</doc>
+</kw>
+<kw name="Wait For No Request" lineno="781">
+<arguments>
+<arg>timeout=5.0</arg>
+</arguments>
+<doc>Command to server to wait for no incoming request during specific time. This call is blocked until HTTP request
+arrives or timeout. Basically server receives all requests after \`Start Server\` and places them to internal
+queue. When test call function \`Wait For No Request\` it checks the queue and if it is not empty returns throws
+exception. Otherwise it waits for request during 'timeout' seconds. If during this time request is received then
+exception is thrown.
+
+`timeout` [in] (int): Period of time in seconds when requests should not be received by HTTP server.
+
+Example how to wait for lack of requests.
+
++---------------------+
+| Wait For No Request |
++---------------------+
+
+.. code:: text
+
+    Wait For No Request
+
+Example how to wait for lack of requests during 10 seconds.
+
++---------------------+----+
+| Wait For No Request | 10 |
++---------------------+----+
+
+.. code:: text
+
+    Wait For No Request   10</doc>
+</kw>
+<kw name="Wait For Request" lineno="741">
+<arguments>
+<arg>timeout=5</arg>
+</arguments>
+<doc>Command to server to wait incoming request. This call is blocked until HTTP request arrives. Basically server
+receives all requests after \`Start Server\` and places them to internal queue. When test call function
+\`Wait For Request\` it checks the queue and if it is not empty returns the first request in the queue. If the
+queue is empty then function waits when the server receives request and place it to the queue. There is
+default time period '5 seconds' to wait request and this waiting time can be changed. If during wait time the
+request is not received then timeout error occurs.
+
+`timeout` [in] (int): Period of time in seconds when a request should be received by HTTP server.
+
+Example how to wait request.
+
++------------------+
+| Wait For Request |
++------------------+
+
+.. code:: text
+
+    Wait For Request
+
+Example how to wait request during 2 seconds.
+
++------------------+---+
+| Wait For Request | 2 |
++------------------+---+
+
+.. code:: text
+
+    Wait For Request   2</doc>
+</kw>
+</keywordspec>
